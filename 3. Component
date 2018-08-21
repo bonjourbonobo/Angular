@@ -1,0 +1,65 @@
+# Create Component
+建議可以在app folder底下再建一個專門存放components的folder。
+```
+import {Component} from '@angular/core'
+
+@Component({
+    selector: 'app-user',
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.css']
+})
+
+export class UserComponent{
+
+}
+```
+
+create好檔案後，component要`export`之外，記得也要去app.module.ts中，把他加到`＠NgModule`中
+```
+import { UserComponent} from './components/user/user.component' //新增的component
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    UserComponent //add to declarations
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+```
+
+# 如何使用
+產好component並加到`＠NgModule`後，再來要embeded到app template(app.component.html)中，才可以在browser中顯示。
+只要把component的selector加到template中就可以了。
+```
+<h1>
+  Welcome to {{ title }}!
+</h1>
+
+<app-user></app-user>
+```
+
+# Property & Method
+Property: attribute of the component
+Method: function inside the component
+```
+export class UserComponent{
+
+    // Property
+    name = "Boo";
+    id = "5566";
+
+    // Method
+    constructor(){
+        this.sayHello();
+    }
+
+    sayHello(){
+        console.log('Hello ' + this.name); // TypeScript語法
+        console.log(`Hello ${this.name}`); //JavaScript語法
+    }
+}
+```
